@@ -1,6 +1,9 @@
 # Builds a docker gui image
 FROM boro/dockergui:x11rdp1.3
 
+RUN apt update && \
+  apt install -y python-xdg pulseaudio pulseaudio-utils
+
 LABEL author="Randy Hall <randy.hall@open-source.guru>"
 
 #########################################
@@ -46,6 +49,8 @@ RUN chmod 555 /startapp.sh /watchapp.sh /etc/rc.local && \
     ln -s /config/ApplicationSettings.xml /nobody && \
     ln -s /config/KeyboardMacros.xml /nobody && \
     ln -s /config/DeviceTree.xml /nobody
+
+RUN chmod 777 /path.conf
 
 #########################################
 ##         EXPORTS AND VOLUMES         ##

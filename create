@@ -34,6 +34,8 @@ sudo docker rm   $CONTAINER > /dev/null 2>&1
 cmd=$( echo \
  sudo docker run -d \
   -p 8080 \
+  --user root \
+  --network=host \
   -h $CONTAINER \
   -e "VIRTUAL_HOST=$CONTAINER.$DOMAIN" \
   -e "VIRTUAL_PORT=8080" \
@@ -42,6 +44,7 @@ cmd=$( echo \
   --name $CONTAINER \
   --restart always \
   -t $IMAGE \
+
  )
 echo $cmd
 ID=$($cmd)
